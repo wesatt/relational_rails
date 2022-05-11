@@ -35,11 +35,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
-  gem "pry"
+  gem 'pry'
   gem 'simplecov'
+  gem 'capybara' # lets us use rspec to test ways that a user would interact with a web page
+  gem 'launchy' # test keyword: save_and_open_page will open the html page to see what capybara sees (kinda like binding.pry)
 end
 
 group :development do
