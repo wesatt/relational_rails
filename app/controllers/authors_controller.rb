@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
   def index
-    @authors = ["author1", "author2", "author3"]
+    @authors = Author.all
   end
 end
