@@ -19,7 +19,7 @@ RSpec.describe "Books show page" do
       expect(page).to have_content(book1.pages)
       expect(page).to have_content(book1.created_at)
       expect(page).to have_content(book1.updated_at)
-      expect(page).to have_content(book1.author_id)
+      # expect(page).to have_content(book1.author_id)
       expect(page).to_not have_content(book2.name)
       expect(page).to_not have_content(book3.name)
       expect(page).to_not have_content(book4.name)
