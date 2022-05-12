@@ -13,7 +13,7 @@ RSpec.describe "Author books index" do
       book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
       book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
 
-      visit "author/#{author1.id}/books"
+      visit "/author/#{author1.id}/books"
 
       # save_and_open_page
       expect(page).to have_content(book1.id)
