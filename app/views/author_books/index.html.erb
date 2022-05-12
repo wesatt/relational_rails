@@ -1,0 +1,10 @@
+<h1>Books by <%= @author.name %> </h1>
+<% @books.each do |book| %>
+  <h2>Title: <%= book.name %> </h2>
+  <p>Book ID: <%= book.id %> </p>
+  <p>Has Foreword?: <%= book.has_foreword %> </p>
+  <p>Pages: <%= book.pages %> </p>
+  <p>Created at: <%= book.created_at %> </p>
+  <p>Updated at: <%= book.updated_at %> </p>
+  <p>Author ID: <%= book.author_id %> </p>
+<% end %>
