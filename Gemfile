@@ -41,7 +41,7 @@ group :development, :test do
   gem 'capybara' # lets us use rspec to test ways that a user would interact with a web page
   gem 'launchy' # test keyword: save_and_open_page will open the html page to see what capybara sees (kinda like binding.pry)
   gem 'shoulda-matchers', '~> 5.0' # for model testing
-  gem 'orderly'
+  gem 'orderly' # adds methods to test for order of text on pages
 end
 
 group :development do

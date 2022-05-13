@@ -17,7 +17,7 @@ RSpec.describe "Authors index page" do
     end
   end
 
-  describe "User Story 6, Parent Index" do
+  describe "User Story 6, Parent Index sorted by Most Recently Created" do
     # As a visitor
     # When I visit the parent index,
     # I see that records are ordered by most recently created first
