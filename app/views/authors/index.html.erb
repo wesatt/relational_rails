@@ -1,4 +1,4 @@
 <h1>Authors</h1>
 <% @authors.each do |author| %>
-  <p><%= author.name %></p>
+  <p><strong><%= author.name %></strong> <%= author.created_at %></p>
 <% end %>
