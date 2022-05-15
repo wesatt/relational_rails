@@ -1,0 +1,10 @@
+<%= form_with url: "/authors/#{@author.id}", method: :patch, local: true do |form| %>
+  <p>Updating Record #: <%= @author.id %></p>
+  <p><%= form.label "Current name: '#{@author.name}':" %>
+  <%= form.text_field :name %></p>
+  <p><%= form.label "Still active? Currently: '#{@author.still_active}':" %>
+  <%= form.text_field :still_active %></p>
+  <p><%= form.label "Current age: '#{@author.age}'" %>
+  <%= form.text_field :age %></p>
+  <%= form.submit "Update Author" %>
+<% end %>

@@ -67,4 +67,23 @@ RSpec.describe "Authors index page" do
       expect(current_path).to eq("/authors")
     end
   end
+
+  describe "User Story 11, Parent Creation (part 1 of 2)" do
+    # As a visitor
+    # When I visit the Parent Index page
+    # Then I see a link to create a new Parent record, "New Parent"
+    # When I click this link
+    # Then I am taken to '/parents/new' where I  see a form for a new parent record
+    it "has a link to create a new Author that takes you to Authors#new" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      visit '/authors'
+
+      expect(page).to have_content("New Author")
+
+      click_link "New Author"
+
+      expect(current_path).to eq("/authors/new")
+      # User story continued in new_spec.rb
+    end
+  end
 end

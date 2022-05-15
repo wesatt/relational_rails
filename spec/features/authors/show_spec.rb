@@ -88,10 +88,28 @@ RSpec.describe "Authors show page" do
       book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
       visit "/authors/#{author1.id}"
 
+      expect(page).to have_content("Books By #{author1.name}")
+
       click_link "Books By #{author1.name}"
 
       expect(current_path).to eq("/authors/#{author1.id}/books")
     end
+  end
 
+  describe "User Story 12, Parent Update (part 1 of 2)" do
+    # As a visitor
+    # When I visit a parent show page
+    # Then I see a link to update the parent "Update Parent"
+    # When I click the link "Update Parent"
+    # Then I am taken to '/parents/:id/edit' where I  see a form to edit the parent's attributes:
+    it "has a link to Authors#edit" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+
+      visit "/authors/#{author1.id}"
+      click_link "Update Author"
+
+      expect(current_path).to eq("/authors/#{author1.id}/edit")
+      # User story continued in edit_spec.rb
+    end
   end
 end

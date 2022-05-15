@@ -2,3 +2,4 @@
 <% @authors.each do |author| %>
   <p><strong><%= author.name %></strong> <%= author.created_at %></p>
 <% end %>
+<%= link_to "New Author", "/authors/new" %>
