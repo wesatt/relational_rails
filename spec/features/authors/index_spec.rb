@@ -104,6 +104,8 @@ RSpec.describe "Authors index page" do
 
       visit "/authors"
 
+      save_and_open_page
+      
       within("#author-#{author2.id}") do
         expect(page).to have_link("Update Author")
 
