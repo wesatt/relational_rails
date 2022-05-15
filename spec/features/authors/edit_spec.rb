@@ -19,7 +19,7 @@ RSpec.describe "Authors#edit page" do
 
       expect(current_path).to eq("/authors/#{author1.id}/edit")
 
-      fill_in('Name', with: 'Stephen King')
+      fill_in(:name, with: 'Stephen King')
       fill_in(:still_active, with: true)
       fill_in(:age, with: 74)
       click_button('Update Author')

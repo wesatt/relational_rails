@@ -6,3 +6,4 @@
 <p>Created at: <%= @author.created_at %> </p>
 <p>Updated at: <%= @author.updated_at %> </p>
 <p><%= link_to "Books By #{@author.name}", "/authors/#{@author.id}/books" %></p>
+<p><%= link_to "Update Author", "/authors/#{@author.id}/edit" %></p>
