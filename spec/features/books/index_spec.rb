@@ -9,9 +9,9 @@ RSpec.describe "Books index page" do
       author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
       author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
       book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
-      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      # book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
       book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
-      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      # book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
       visit '/books'
 
       # save_and_open_page
@@ -22,9 +22,9 @@ RSpec.describe "Books index page" do
       expect(page).to have_content(book1.created_at)
       expect(page).to have_content(book1.updated_at)
       expect(page).to have_content(book1.author_id)
-      expect(page).to have_content(book2.name)
+      # expect(page).to have_content(book2.name)
       expect(page).to have_content(book3.name)
-      expect(page).to have_content(book4.name)
+      # expect(page).to have_content(book4.name)
     end
   end
 
@@ -57,6 +57,28 @@ RSpec.describe "Books index page" do
       click_link "Authors Home"
 
       expect(current_path).to eq("/authors")
+    end
+  end
+
+  describe "User Story 15, Child Index only shows `true` Records" do
+    # As a visitor
+    # When I visit the child index
+    # Then I only see records where the boolean column is `true`
+    it "only shows books with a foreword" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      visit '/books'
+
+      # save_and_open_page
+      expect(page).to have_content(book1.name)
+      expect(page).to have_content(book3.name)
+
+      expect(page).to_not have_content(book2.name)
+      expect(page).to_not have_content(book4.name)
     end
   end
 end

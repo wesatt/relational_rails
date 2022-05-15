@@ -17,8 +17,6 @@ RSpec.describe "Books edit page" do
 
       visit "/books/#{book2.id}/edit"
 
-      save_and_open_page
-
       fill_in(:name, with: 'The Stand')
       fill_in(:has_foreword, with: false)
       fill_in(:pages, with: 200)
