@@ -88,8 +88,6 @@ RSpec.describe "Authors show page" do
       book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
       visit "/authors/#{author1.id}"
 
-      save_and_open_page
-
       click_link "Books By #{author1.name}"
 
       expect(current_path).to eq("/authors/#{author1.id}/books")
