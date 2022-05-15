@@ -14,3 +14,4 @@ book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, aut
 book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
 book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
 book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
