@@ -81,4 +81,30 @@ RSpec.describe "Author books index page" do
       expect(current_path).to eq("/authors/#{author1.id}/books/new")
     end
   end
+
+  describe "User Story 16, Sort Parent's Children in Alphabetical Order by name " do
+    # As a visitor
+    # When I visit the Parent's children Index Page
+    # Then I see a link to sort children in alphabetical order
+    # When I click on the link
+    # I'm taken back to the Parent's children Index Page where I see all of the parent's children in alphabetical order
+    it "has a link to sort books in alphabetical order" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/authors/#{author1.id}/books"
+
+      # save_and_open_page
+      expect(book1.name).to appear_before(book2.name)
+      expect(book2.name).to appear_before(book5.name)
+      expect(page).to have_link("Sort Books by Alphabetical Order")
+
+      click_link "Sort Books by Alphabetical Order"
+
+      expect(book5.name).to appear_before(book1.name)
+      expect(book1.name).to appear_before(book2.name)
+    end
+  end
 end
