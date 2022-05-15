@@ -1,5 +1,11 @@
 <h1>Authors</h1>
 <% @authors.each do |author| %>
-  <p><strong>ID: <%= author.id %> <%= author.name %></strong> <%= author.created_at %></p>
+  <div id="author-<%= author.id %>" >
+  <p>
+    <strong>ID: <%= author.id %> <%= author.name %></strong>
+    <%= author.created_at %>
+    <%= link_to "Update Author", "/authors/#{author.id}/edit" %>
+  </p>
+  </div>
 <% end %>
 <%= link_to "New Author", "/authors/new" %>

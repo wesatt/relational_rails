@@ -86,4 +86,42 @@ RSpec.describe "Authors index page" do
       # User story continued in new_spec.rb
     end
   end
+
+  describe "User Story 17, Parent Update From Parent Index Page" do
+    # As a visitor
+    # When I visit the parent index page
+    # Next to every parent, I see a link to edit that parent's info
+    # When I click the link
+    # I should be taken to that parents edit page where I can update its information just like in User Story 4
+    it "has a link to update each author's info" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/authors"
+
+      within("#author-#{author2.id}") do
+        expect(page).to have_link("Update Author")
+
+        click_link "Update Author"
+
+        expect(current_path).to eq("/authors/#{author2.id}/edit")
+      end
+
+      visit "/authors"
+
+      within("#author-#{author1.id}") do
+        expect(page).to have_link("Update Author")
+
+        click_link "Update Author"
+
+        expect(current_path).to eq("/authors/#{author1.id}/edit")
+      end
+
+    end
+  end
 end

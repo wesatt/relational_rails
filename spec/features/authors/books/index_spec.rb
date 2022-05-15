@@ -81,4 +81,60 @@ RSpec.describe "Author books index page" do
       expect(current_path).to eq("/authors/#{author1.id}/books/new")
     end
   end
+
+  describe "User Story 16, Sort Parent's Children in Alphabetical Order by name " do
+    # As a visitor
+    # When I visit the Parent's children Index Page
+    # Then I see a link to sort children in alphabetical order
+    # When I click on the link
+    # I'm taken back to the Parent's children Index Page where I see all of the parent's children in alphabetical order
+    it "has a link to sort books in alphabetical order" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/authors/#{author1.id}/books"
+
+      # save_and_open_page
+      expect(book1.name).to appear_before(book2.name)
+      expect(book2.name).to appear_before(book5.name)
+      expect(page).to have_link("Sort Books Alphabetically")
+
+      click_link "Sort Books Alphabetically"
+
+      expect(book5.name).to appear_before(book1.name)
+      expect(book1.name).to appear_before(book2.name)
+    end
+  end
+
+  describe "User Story 18, Child Update From Childs Index Page (part 1 of 2)" do
+    # As a visitor
+    # When I visit the `child_table_name` index page or a parent `child_table_name` index page
+    # Next to every child, I see a link to edit that child's info
+    # When I click the link
+    # I should be taken to that `child_table_name` edit page where I can update its information just like in User Story 11
+    it "each book has a link to edit that book's info" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/authors/#{author1.id}/books"
+
+      within "#book-#{book2.id}" do
+        expect(page).to have_link("Update Book")
+
+        click_link "Update Book"
+
+        expect(current_path).to eq("/books/#{book2.id}/edit")
+      end
+    end
+  end
 end
