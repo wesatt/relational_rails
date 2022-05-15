@@ -1,10 +1,12 @@
 <h1>Books</h1>
 <% @books.each do |book| %>
-<h2>Title: <%= book.name %></h2>
-<p>ID: <%= book.id %></p>
-<p>Has Foreword?: <%= book.has_foreword %></p>
-<p>Pages: <%= book.pages %></p>
-<p>Created At: <%= book.created_at %></p>
-<p>Updated At: <%= book.updated_at %></p>
-<p>Author ID: <%= book.author_id %></p>
+  <div id="book-<%= book.id %>" >
+  <h2>Title: <%= book.name %></h2>
+  <p>ID: <%= book.id %> &nbsp &nbsp <%= link_to "Update Book", "/books/#{book.id}/edit" %></p>
+  <p>Has Foreword?: <%= book.has_foreword %></p>
+  <p>Pages: <%= book.pages %></p>
+  <p>Created At: <%= book.created_at %></p>
+  <p>Updated At: <%= book.updated_at %></p>
+  <p>Author ID: <%= book.author_id %></p>
+  </div>
 <% end %>
