@@ -73,4 +73,27 @@ RSpec.describe "Authors show page" do
       expect(current_path).to eq("/authors")
     end
   end
+
+  describe "User Story 10, Parent Child Index Link" do
+    # As a visitor
+    # When I visit a parent show page ('/parents/:id')
+    # Then I see a link to take me to that parent's `child_table_name` page ('/parents/:id/child_table_name')
+    it "has a link to the Authors list of books (authors/:id/books)" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      visit "/authors/#{author1.id}"
+
+      save_and_open_page
+
+      click_link "Books By #{author1.name}"
+
+      expect(current_path).to eq("/authors/#{author1.id}/books")
+    end
+
+  end
 end
