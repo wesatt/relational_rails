@@ -104,8 +104,6 @@ RSpec.describe "Authors index page" do
 
       visit "/authors"
 
-      save_and_open_page
-      
       within("#author-#{author2.id}") do
         expect(page).to have_link("Update Author")
 
@@ -113,6 +111,8 @@ RSpec.describe "Authors index page" do
 
         expect(current_path).to eq("/authors/#{author2.id}/edit")
       end
+
+      visit "/authors"
 
       within("#author-#{author1.id}") do
         expect(page).to have_link("Update Author")
