@@ -59,4 +59,29 @@ RSpec.describe "Books show page" do
       expect(current_path).to eq("/authors")
     end
   end
+
+  describe "User Story 14, Child Update (part 1 of 2)" do
+    # As a visitor
+    # When I visit a Child Show page
+    # Then I see a link to update that Child "Update Child"
+    # When I click the link
+    # I am taken to '/child_table_name/:id/edit' where I see a form to edit the child's attributes:
+
+    # When I click the button to submit the form "Update Child"
+    # Then a `PATCH` request is sent to '/child_table_name/:id',
+    # the child's data is updated,
+    # and I am redirected to the Child Show page where I see the Child's updated information
+    it "has a link to update the Book information" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+
+      visit "/books/#{book1.id}"
+
+      expect(page).to have_link("Update Book")
+
+      click_link "Update Book"
+
+      expect(current_path).to eq("/books/#{book1.id}/edit")
+    end
+  end
 end

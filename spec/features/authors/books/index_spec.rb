@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Author books index" do
+RSpec.describe "Author books index page" do
   describe "User Story 5, Parent Children Index" do
     # As a visitor
     # When I visit '/parents/:parent_id/child_table_name'
@@ -59,6 +59,26 @@ RSpec.describe "Author books index" do
       click_link "Authors Home"
 
       expect(current_path).to eq("/authors")
+    end
+  end
+
+  describe "User Story 13, Parent Child Creation (part 1 of 2)" do
+    # As a visitor
+    # When I visit a Parent Childs Index page
+    # Then I see a link to add a new adoptable child for that parent "Create Child"
+    # When I click the link
+    # I am taken to '/parents/:parent_id/child_table_name/new' where I see a form to add a new adoptable child
+    it "has a link to add a new book to the author" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      visit "/authors/#{author1.id}/books"
+
+      expect(page).to have_link("Add Book")
+
+      click_link "Add Book"
+
+      expect(current_path).to eq("/authors/#{author1.id}/books/new")
     end
   end
 end
