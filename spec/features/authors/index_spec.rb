@@ -83,6 +83,7 @@ RSpec.describe "Authors index page" do
       click_link "New Author"
 
       expect(current_path).to eq("/authors/new")
+      # User story continued in new_spec.rb
     end
   end
 end
