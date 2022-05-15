@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get '/authors/:id', to: 'authors#show'
   patch '/authors/:id', to: 'authors#update'
   get '/authors/:id/edit', to: 'authors#edit'
+  get '/authors/:id/books', to: 'author_books#index'
+  post '/authors/:id/books', to: 'author_books#create'
+  get '/authors/:id/books/new', to: 'author_books#new'
   get '/books', to: 'books#index'
   get '/books/:id', to: 'books#show'
-  get '/authors/:author_id/books', to: 'author_books#index'
 end

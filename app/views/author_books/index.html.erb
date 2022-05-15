@@ -8,3 +8,4 @@
   <p>Updated at: <%= book.updated_at %> </p>
   <p>Author ID: <%= book.author_id %> </p>
 <% end %>
+<%= link_to "Add Book", "/authors/#{@author.id}/books/new" %>

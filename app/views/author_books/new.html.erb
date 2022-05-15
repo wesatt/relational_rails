@@ -1,0 +1,10 @@
+<%= form_with url: "/authors/#{@author.id}/books", method: :post, local: true do |form| %>
+  <p>Adding book to <%= @author.name %></p>
+  <p><%= form.label "Title:" %>
+  <%= form.text_field :name %></p>
+  <p><%= form.label "Has Foreword?" %>
+  <%= form.text_field :has_foreword %></p>
+  <p><%= form.label "Pages:" %>
+  <%= form.text_field :pages %></p>
+  <%= form.submit "Add Book" %>
+<% end %>
