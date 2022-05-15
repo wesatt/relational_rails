@@ -1,0 +1,10 @@
+<%= form_with url: "/books/#{@book.id}", method: :patch, local: true do |form| %>
+  <p>Updating Record #: <%= @book.id %></p>
+  <p><%= form.label "Current title: '#{@book.name}':" %>
+  <%= form.text_field :name %></p>
+  <p><%= form.label "Has Foreword? Currently: '#{@book.has_foreword}':" %>
+  <%= form.text_field :has_foreword %></p>
+  <p><%= form.label "Current pages: '#{@book.pages}'" %>
+  <%= form.text_field :pages %></p>
+  <%= form.submit "Update Book" %>
+<% end %>
