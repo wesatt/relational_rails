@@ -11,7 +11,7 @@ RSpec.describe "Authors new page" do
       visit "/authors/new"
 
       fill_in('Name', with: 'Stephen King')
-      fill_in(:still_active, with: true)
+      select("true", from: :still_active)
       fill_in(:age, with: 74)
       click_button('Create Author')
 

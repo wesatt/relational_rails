@@ -9,8 +9,8 @@ class AuthorBooksController < ApplicationController
 
   def create
     author = Author.find(params[:id])
-    new_book = author.books.create(book_param_param_param_pam_pa)
-    new_book.save
+    author.books.create(book_param_param_param_pam_pa)
+    # new_book.save
     redirect_to "/authors/#{author.id}/books"
   end
 

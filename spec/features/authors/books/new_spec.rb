@@ -18,7 +18,8 @@ RSpec.describe "Author books new page" do
       visit "/authors/#{author1.id}/books/new"
 
       fill_in(:name, with: 'IT')
-      fill_in(:has_foreword, with: true)
+      # fill_in(:has_foreword, with: true)
+      select("true", from: :has_foreword)
       fill_in(:pages, with: 450)
       click_button('Add Book')
 

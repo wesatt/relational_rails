@@ -14,7 +14,7 @@ RSpec.describe "Author books index page" do
       book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
 
       visit "/authors/#{author1.id}/books"
-
+      
       expect(page).to have_content(book1.id)
       expect(page).to have_content(book1.name)
       expect(page).to have_content(book1.has_foreword)
