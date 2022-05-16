@@ -1,6 +1,6 @@
 <h1>Books by <%= @author.name %> </h1>
 <p> <%= link_to "Sort Books Alphabetically", "/authors/#{@author.id}/books/?sort=Alphabetical" %> </p>
-<% @books.each do |book| %>
+<% @author.book_order(params[:sort]).each do |book| %>
   <div id="book-<%= book.id %>"
   <h2>Title: <%= book.name %> </h2>
   <p>Book ID: <%= book.id %> &nbsp &nbsp <%= link_to "Update Book", "/books/#{book.id}/edit" %></p>

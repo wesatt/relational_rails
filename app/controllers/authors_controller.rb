@@ -28,7 +28,7 @@ class AuthorsController < ApplicationController
   end
 
   private
-  def author_param_param_param_pam_pa
-    params.permit(:name, :still_active, :age)
-  end
+    def author_param_param_param_pam_pa
+      params.permit(:name, :still_active, :age)
+    end
 end

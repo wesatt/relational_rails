@@ -11,7 +11,6 @@ RSpec.describe "Authors index page" do
       author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
       visit '/authors'
 
-      # save_and_open_page
       expect(page).to have_content(author1.name)
       expect(page).to have_content(author2.name)
     end
@@ -27,7 +26,6 @@ RSpec.describe "Authors index page" do
       author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
       visit '/authors'
 
-      # save_and_open_page
       expect("Jen Gunter").to appear_before("Stephen King")
       expect(page).to have_content(author1.name)
       expect(page).to have_content(author2.name)

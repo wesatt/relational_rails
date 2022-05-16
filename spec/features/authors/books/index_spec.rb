@@ -15,7 +15,6 @@ RSpec.describe "Author books index page" do
 
       visit "/authors/#{author1.id}/books"
 
-      # save_and_open_page
       expect(page).to have_content(book1.id)
       expect(page).to have_content(book1.name)
       expect(page).to have_content(book1.has_foreword)
@@ -99,7 +98,6 @@ RSpec.describe "Author books index page" do
 
       visit "/authors/#{author1.id}/books"
 
-      # save_and_open_page
       expect(book1.name).to appear_before(book2.name)
       expect(book2.name).to appear_before(book5.name)
       expect(page).to have_link("Sort Books Alphabetically")

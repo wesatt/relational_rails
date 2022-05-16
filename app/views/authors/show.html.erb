@@ -2,7 +2,7 @@
 <p>ID: <%= @author.id %> </p>
 <p>Still active? <%= @author.still_active %> </p>
 <p>Age: <%= @author.age %> </p>
-<p>Count of Books: <%= @author.books.count %> </p>
+<p>Count of Books: <%= @author.books_count %> </p>
 <p>Created at: <%= @author.created_at %> </p>
 <p>Updated at: <%= @author.updated_at %> </p>
 <p><%= link_to "Books By #{@author.name}", "/authors/#{@author.id}/books" %></p>

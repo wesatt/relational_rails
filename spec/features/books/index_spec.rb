@@ -14,7 +14,6 @@ RSpec.describe "Books index page" do
       # book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
       visit '/books'
 
-      # save_and_open_page
       expect(page).to have_content(book1.id)
       expect(page).to have_content(book1.name)
       expect(page).to have_content(book1.has_foreword)
@@ -73,7 +72,6 @@ RSpec.describe "Books index page" do
       book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
       visit '/books'
 
-      # save_and_open_page
       expect(page).to have_content(book1.name)
       expect(page).to have_content(book3.name)
 
@@ -99,7 +97,6 @@ RSpec.describe "Books index page" do
 
       visit "/books"
 
-      save_and_open_page
       within "#book-#{book5.id}" do
         expect(page).to have_link("Update Book")
 

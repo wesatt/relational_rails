@@ -19,7 +19,7 @@ class BooksController < ApplicationController
   end
 
   private
-  def book_param_param_param_pam_pa
-    params.permit(:name, :has_foreword, :pages)
-  end
+    def book_param_param_param_pam_pa
+      params.permit(:name, :has_foreword, :pages)
+    end
 end

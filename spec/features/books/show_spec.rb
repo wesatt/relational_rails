@@ -14,7 +14,6 @@ RSpec.describe "Books show page" do
       book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
       visit "/books/#{book1.id}"
 
-      # save_and_open_page
       expect(page).to have_content(book1.id)
       expect(page).to have_content(book1.name)
       expect(page).to have_content(book1.has_foreword)
