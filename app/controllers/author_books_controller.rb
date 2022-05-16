@@ -9,13 +9,12 @@ class AuthorBooksController < ApplicationController
 
   def create
     author = Author.find(params[:id])
-    author.books.create(book_param_param_param_pam_pa)
-    # new_book.save
+    author.books.create(book_params)
     redirect_to "/authors/#{author.id}/books"
   end
 
   private
-    def book_param_param_param_pam_pa
+    def book_params
       params.permit(:name, :has_foreword, :pages)
     end
 end

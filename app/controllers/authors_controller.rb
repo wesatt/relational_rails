@@ -11,8 +11,7 @@ class AuthorsController < ApplicationController
   end
 
   def create
-    new_author = Author.create(author_param_param_param_pam_pa)
-    new_author.save
+    Author.create(author_params)
     redirect_to "/authors"
   end
 
@@ -21,14 +20,13 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    update_author = Author.find(params[:id])
-    update_author.update(author_param_param_param_pam_pa)
-    update_author.save
+    author = Author.find(params[:id])
+    author.update(author_params)
     redirect_to "/authors/#{params[:id]}"
   end
 
   private
-    def author_param_param_param_pam_pa
+    def author_params
       params.permit(:name, :still_active, :age)
     end
 end
