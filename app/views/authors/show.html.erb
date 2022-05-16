@@ -7,3 +7,4 @@
 <p>Updated at: <%= @author.updated_at %> </p>
 <p><%= link_to "Books By #{@author.name}", "/authors/#{@author.id}/books" %></p>
 <p><%= link_to "Update Author", "/authors/#{@author.id}/edit" %></p>
+<p><%= link_to "Delete Author", "/authors/#{@author.id}", method: :delete %></p>
