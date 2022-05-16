@@ -14,7 +14,7 @@ RSpec.describe "Author books index page" do
       book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
 
       visit "/authors/#{author1.id}/books"
-      
+
       expect(page).to have_content(book1.id)
       expect(page).to have_content(book1.name)
       expect(page).to have_content(book1.has_foreword)
@@ -133,6 +133,37 @@ RSpec.describe "Author books index page" do
 
         expect(current_path).to eq("/books/#{book2.id}/edit")
       end
+    end
+  end
+
+  describe "User Story 21, Display Records Over a Given Threshold" do
+    # As a visitor
+    # When I visit the Parent's children Index Page
+    # I see a form that allows me to input a number value
+    # When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
+    # Then I am brought back to the current index page with only the records that meet that threshold shown.
+    it "can return books that meet the criteria entered by user" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "IT", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/authors/#{author1.id}/books"
+
+      expect(page).to have_content("The Gunslinger")
+      expect(page).to have_content("The Stand")
+      expect(page).to have_content("IT")
+
+      fill_in(:search_number, with: 200) #pages column
+      click_button("Submit Search")
+
+      expect(current_path).to eq("/authors/#{author1.id}/books")
+      expect(page).to_not have_content("The Gunslinger")
+      expect(page).to_not have_content("The Stand")
+      expect(page).to have_content("IT")
     end
   end
 end
