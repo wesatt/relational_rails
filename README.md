@@ -1,6 +1,9 @@
-# README for Relational Rails Project (Turing Institute, Mod2 Backend 2203)
+# README
 
-Here is the Database layout:
+## Relational Rails Project (Turing Institute, Mod2 Backend 2203)
+
+### Here is the Database layout:
+
 ![DB](images/relational_rails_db_setup.png "Relational_Rails_DB")
 
 
