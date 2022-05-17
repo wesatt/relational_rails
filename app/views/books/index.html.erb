@@ -1,7 +1,7 @@
-<h1>Books</h1>
+<h1>Books with Forewords</h1>
 <% @books.each do |book| %>
   <div id="book-<%= book.id %>" >
-  <h2>Title: <%= book.name %></h2>
+  <h2>Title: <%= link_to "#{book.name}", "/books/#{book.id}" %></h2>
   <p>ID: <%= book.id %> &nbsp &nbsp
     <%= link_to "Update Book", "/books/#{book.id}/edit" %> &nbsp &nbsp
     <%= link_to "Delete Book", "/books/#{book.id}", method: :delete %></p>

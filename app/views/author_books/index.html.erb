@@ -8,13 +8,14 @@
 <% end %>
 <% @author.book_filter(params[:sort], params[:search_number]).each do |book| %>
   <div id="book-<%= book.id %>"
-  <h2>Title: <%= book.name %> </h2>
+  <h2><u>Title: <strong><%= book.name %></strong></u></h2>
   <p>Book ID: <%= book.id %> &nbsp &nbsp <%= link_to "Update Book", "/books/#{book.id}/edit" %></p>
   <p>Has Foreword?: <%= book.has_foreword %> </p>
   <p>Pages: <%= book.pages %> </p>
   <p>Created at: <%= book.created_at %> </p>
   <p>Updated at: <%= book.updated_at %> </p>
   <p>Author ID: <%= book.author_id %> </p>
+  <br>
   </div>
 <% end %>
 <%= link_to "Add Book", "/authors/#{@author.id}/books/new" %>
