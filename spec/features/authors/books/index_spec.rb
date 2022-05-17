@@ -104,6 +104,7 @@ RSpec.describe "Author books index page" do
 
       click_link "Sort Books Alphabetically"
 
+      expect(current_path).to eq("/authors/#{author1.id}/books/")
       expect(book5.name).to appear_before(book1.name)
       expect(book1.name).to appear_before(book2.name)
     end
@@ -160,7 +161,7 @@ RSpec.describe "Author books index page" do
       fill_in(:search_number, with: 200) #pages column
       click_button("Submit Search")
 
-      expect(current_path).to eq("/authors/#{author1.id}/books")
+      expect(current_path).to eq("/authors/#{author1.id}/books/")
       expect(page).to_not have_content("The Gunslinger")
       expect(page).to_not have_content("The Stand")
       expect(page).to have_content("IT")

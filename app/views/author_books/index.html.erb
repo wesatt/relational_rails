@@ -1,6 +1,12 @@
 <h1>Books by <%= @author.name %> </h1>
 <p> <%= link_to "Sort Books Alphabetically", "/authors/#{@author.id}/books/?sort=Alphabetical" %> </p>
-<% @author.book_order(params[:sort]).each do |book| %>
+<%= form_with url: "/authors/#{@author.id}/books/", method: :get, local: true do |form| %>
+  <%= form.hidden_field :sort, value: "Filter" %>
+  <p><%= form.label "Only return records with more than" %>
+    <%= form.text_field :search_number %> pages
+    <%= form.submit "Submit Search" %></p>
+<% end %>
+<% @author.book_order(params[:sort], params[:search_number]).each do |book| %>
   <div id="book-<%= book.id %>"
   <h2>Title: <%= book.name %> </h2>
   <p>Book ID: <%= book.id %> &nbsp &nbsp <%= link_to "Update Book", "/books/#{book.id}/edit" %></p>

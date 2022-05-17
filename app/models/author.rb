@@ -12,7 +12,7 @@ class Author < ApplicationRecord
     books.count
   end
 
-  def book_order(sort_order)
-    books.site_order(sort_order)
+  def book_order(sort_order = nil, filter = nil)
+    books.site_order(sort_order, filter)
   end
 end
