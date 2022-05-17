@@ -8,7 +8,7 @@ class Book < ApplicationRecord
     where(has_foreword: true)
   end
 
-  def self.site_order(sort_order = nil, filter_param = nil)
+  def self.filtered_by(sort_order = nil, filter_param = nil)
     if sort_order == "Alphabetical"
       Book.order(:name)
     elsif sort_order == "Filter"

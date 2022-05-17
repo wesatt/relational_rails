@@ -6,7 +6,7 @@
     <%= form.text_field :search_number %> pages
     <%= form.submit "Submit Search" %></p>
 <% end %>
-<% @author.book_order(params[:sort], params[:search_number]).each do |book| %>
+<% @author.book_filter(params[:sort], params[:search_number]).each do |book| %>
   <div id="book-<%= book.id %>"
   <h2>Title: <%= book.name %> </h2>
   <p>Book ID: <%= book.id %> &nbsp &nbsp <%= link_to "Update Book", "/books/#{book.id}/edit" %></p>
