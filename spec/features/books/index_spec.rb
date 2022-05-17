@@ -106,4 +106,32 @@ RSpec.describe "Books index page" do
       end
     end
   end
+
+  describe "User Story 23, Child Delete From Childs Index Page" do
+    # As a visitor
+    # When I visit the `child_table_name` index page or a parent `child_table_name` index page
+    # Next to every child, I see a link to delete that child
+    # When I click the link
+    # I should be taken to the `child_table_name` index page where I no longer see that child
+    it "can delete a specific book through a link" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: true, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/books"
+
+      expect(page).to have_content("The Stand")
+
+      within "#book-#{book2.id}" do
+        click_link "Delete Book"
+      end
+
+      expect(current_path).to eq("/books")
+      expect(page).to_not have_content("The Stand")
+    end
+  end
 end
