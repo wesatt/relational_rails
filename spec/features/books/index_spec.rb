@@ -134,4 +134,34 @@ RSpec.describe "Books index page" do
       expect(page).to_not have_content("The Stand")
     end
   end
+
+  describe "Non User Story Functionality" do
+    # As the person writing code
+    # when I visit the child index
+    # I can click on the book names and they are links to take me to their respective show page
+    it "has links to the show page" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: true, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "IT", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/books"
+
+      expect(page).to have_content("The Gunslinger")
+      expect(page).to have_content("The Stand")
+      expect(page).to have_content("IT")
+
+      within "#book-#{book2.id}" do
+        click_link book2.name
+      end
+
+      expect(current_path).to eq("/books/#{book2.id}")
+      expect(page).to have_content("The Stand")
+      expect(page).to_not have_content("The Gunslinger")
+      expect(page).to_not have_content("IT")
+    end
+  end
 end

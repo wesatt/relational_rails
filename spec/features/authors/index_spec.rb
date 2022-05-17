@@ -149,4 +149,32 @@ RSpec.describe "Authors index page" do
       expect(page).to_not have_content(author2.name)
     end
   end
+
+  describe "Non User Story Functionality" do
+    # As the person writing code
+    # when I visit the parent index
+    # I can click on the author names and they are links to take me to their respective show page
+    it "has links to the show page" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/authors"
+
+      expect(page).to have_content(author1.name)
+      expect(page).to have_content(author2.name)
+
+      within("#author-#{author2.id}") do
+        click_link author2.name
+      end
+
+      expect(current_path).to eq("/authors/#{author2.id}")
+      expect(page).to_not have_content(author1.name)
+      expect(page).to have_content(author2.name)
+    end
+  end
 end

@@ -2,9 +2,9 @@
 <% @authors.each do |author| %>
   <div id="author-<%= author.id %>" >
   <p>
-    <strong>ID: <%= author.id %> <%= author.name %></strong>
+    <strong>ID: <%= author.id %> <%= link_to "#{author.name}", "/authors/#{author.id}" %></strong>
     <%= author.created_at %>
-    <%= link_to "Update Author", "/authors/#{author.id}/edit" %>
+    <%= link_to "Update Author", "/authors/#{author.id}/edit" %> &nbsp &nbsp
     <%= link_to "Delete Author", "/authors/#{author.id}", method: :delete %>
   </p>
   </div>
