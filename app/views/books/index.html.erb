@@ -2,7 +2,9 @@
 <% @books.each do |book| %>
   <div id="book-<%= book.id %>" >
   <h2>Title: <%= book.name %></h2>
-  <p>ID: <%= book.id %> &nbsp &nbsp <%= link_to "Update Book", "/books/#{book.id}/edit" %></p>
+  <p>ID: <%= book.id %> &nbsp &nbsp
+    <%= link_to "Update Book", "/books/#{book.id}/edit" %> &nbsp &nbsp
+    <%= link_to "Delete Book", "/books/#{book.id}", method: :delete %></p>
   <p>Has Foreword?: <%= book.has_foreword %></p>
   <p>Pages: <%= book.pages %></p>
   <p>Created At: <%= book.created_at %></p>

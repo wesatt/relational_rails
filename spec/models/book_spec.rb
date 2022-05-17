@@ -15,7 +15,7 @@ RSpec.describe Book, type: :model do
   end
 
   describe "class methods" do
-    it "Books#with_foreword only has books with a foreword" do
+    it "Book#with_foreword only has books with a foreword" do
       author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
       author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
       book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
@@ -26,7 +26,7 @@ RSpec.describe Book, type: :model do
       expect(Book.with_foreword).to eq([book1, book3])
     end
 
-    it "Books#site_order can return a list of books alphabetically" do
+    it "Book#filtered_by(sort_order, filter) can return a list of books alphabetically or filtered by pages" do
       author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
       author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
       book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
@@ -36,8 +36,10 @@ RSpec.describe Book, type: :model do
       book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
 
 
-      expect(author1.books.site_order("Alphabetical")).to eq([book5, book1, book2])
-      expect(author1.books.site_order("Literally anything else")).to eq([book1, book2, book5])
+      expect(author1.books.filtered_by("Alphabetical")).to eq([book5, book1, book2])
+      expect(author1.books.filtered_by("Literally anything else except Filter")).to eq([book1, book2, book5])
+
+      expect(author1.books.filtered_by("Filter", 200)).to eq([book5])
     end
   end
 end

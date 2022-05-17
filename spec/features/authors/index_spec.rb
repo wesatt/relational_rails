@@ -11,7 +11,6 @@ RSpec.describe "Authors index page" do
       author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
       visit '/authors'
 
-      # save_and_open_page
       expect(page).to have_content(author1.name)
       expect(page).to have_content(author2.name)
     end
@@ -27,7 +26,6 @@ RSpec.describe "Authors index page" do
       author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
       visit '/authors'
 
-      # save_and_open_page
       expect("Jen Gunter").to appear_before("Stephen King")
       expect(page).to have_content(author1.name)
       expect(page).to have_content(author2.name)
@@ -121,7 +119,34 @@ RSpec.describe "Authors index page" do
 
         expect(current_path).to eq("/authors/#{author1.id}/edit")
       end
+    end
+  end
 
+  describe "User Story 22, Parent Delete From Parent Index Page" do
+    # As a visitor
+    # When I visit the parent index page
+    # Next to every parent, I see a link to delete that parent
+    # When I click the link
+    # I am returned to the Parent Index Page where I no longer see that parent
+    it "can delete an Author (along with all of their books)" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: false, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/authors"
+
+      expect(page).to have_content(author2.name)
+
+      within("#author-#{author2.id}") do
+        click_link "Delete Author"
+      end
+
+      expect(current_path).to eq("/authors")
+      expect(page).to_not have_content(author2.name)
     end
   end
 end

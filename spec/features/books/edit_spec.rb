@@ -18,7 +18,7 @@ RSpec.describe "Books edit page" do
       visit "/books/#{book2.id}/edit"
 
       fill_in(:name, with: 'The Stand')
-      fill_in(:has_foreword, with: false)
+      select("false", from: :has_foreword)
       fill_in(:pages, with: 200)
       click_button('Update Book')
 

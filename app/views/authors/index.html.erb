@@ -5,6 +5,7 @@
     <strong>ID: <%= author.id %> <%= author.name %></strong>
     <%= author.created_at %>
     <%= link_to "Update Author", "/authors/#{author.id}/edit" %>
+    <%= link_to "Delete Author", "/authors/#{author.id}", method: :delete %>
   </p>
   </div>
 <% end %>

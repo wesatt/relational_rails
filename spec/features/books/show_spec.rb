@@ -14,7 +14,6 @@ RSpec.describe "Books show page" do
       book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
       visit "/books/#{book1.id}"
 
-      # save_and_open_page
       expect(page).to have_content(book1.id)
       expect(page).to have_content(book1.name)
       expect(page).to have_content(book1.has_foreword)
@@ -82,6 +81,40 @@ RSpec.describe "Books show page" do
       click_link "Update Book"
 
       expect(current_path).to eq("/books/#{book1.id}/edit")
+    end
+  end
+
+  describe "User Story 20, Child Delete" do
+    # As a visitor
+    # When I visit a child show page
+    # Then I see a link to delete the child "Delete Child"
+    # When I click the link
+    # Then a 'DELETE' request is sent to '/child_table_name/:id',
+    # the child is deleted,
+    # and I am redirected to the child index page where I no longer see this child
+    it "can delete a child" do
+      author1 = Author.create!(name: "Stephen King", still_active: true, age: 74)
+      author2 = Author.create!(name: "Jen Gunter", still_active: true, age: 55)
+      book1 = Book.create!(name: "The Gunslinger", has_foreword: true, pages: 100, author: author1)
+      book2 = Book.create!(name: "The Stand", has_foreword: true, pages: 200, author_id: author1.id)
+      book3 = author2.books.create!(name: "The Vagina Bible", has_foreword: true, pages: 100)
+      book4 = author2.books.create!(name: "The Menopause Manifesto", has_foreword: false, pages: 200)
+      book5 = Book.create!(name: "It", has_foreword: true, pages: 450, author_id: author1.id)
+
+      visit "/books"
+
+      expect(page).to have_content("The Gunslinger")
+      expect(page).to have_content("The Stand")
+      expect(page).to have_content("It")
+
+      visit "/books/#{book5.id}"
+
+      click_link "Delete Book"
+
+      expect(current_path).to eq("/books")
+      expect(page).to have_content("The Gunslinger")
+      expect(page).to have_content("The Stand")
+      expect(page).to_not have_content("It")
     end
   end
 end
