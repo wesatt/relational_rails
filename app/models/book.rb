@@ -10,7 +10,8 @@ class Book < ApplicationRecord
 
   def self.filtered_by(sort_order = nil, filter_param = nil)
     if sort_order == "Alphabetical"
-      Book.order(:name)
+      # Book.order(:name)
+      Book.order(Arel.sql("lower(name)"))
     elsif sort_order == "Filter"
       Book.where(["pages > ?", filter_param])
     else
